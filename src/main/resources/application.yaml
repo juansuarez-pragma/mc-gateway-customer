@@ -14,3 +14,21 @@ microservices:
   customer-service-url: ${CUSTOMER_SERVICE_URL:http://localhost:8083}
   account-service-url: ${ACCOUNT_SERVICE_URL:http://localhost:8081}
   credit-disbursement-service-url: ${CREDIT_DISBURSEMENT_URL:http://localhost:8082}
+springdoc:
+  api-docs:
+    enable: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - name: Customer Service
+        url: /v3/api-docs/customers
+      - name: Account service
+        url: /v3/api-docs/accounts
+      - name: Credit Disbursement Service
+        url: /v3/api-docs/credit-disbursements
+    disable-swagger-default-url: true
+    operations-sorter: alpha
+    tags-sorter: alpha
+    display-request-duration: true

@@ -25,6 +25,18 @@ public class GatewayConfig {
                         .uri(accountServiceUrl))
                 .route("credit-disbursement-service", r -> r.path("/credit-disbursements/**")
                         .uri(creditDisbursementServiceUrl))
+                .route("swagger-customers", r -> r.path("/v3/api-docs/customers")
+                        .filters(f -> f
+                                .rewritePath("/v3/api-docs/customers", "/v3/api-docs"))
+                        .uri(customerServiceUrl))
+                .route("swagger-accounts", r -> r.path("/v3/api-docs/accounts")
+                        .filters(f -> f
+                                .rewritePath("/v3/api-docs/accounts", "/v3/api-docs"))
+                        .uri(accountServiceUrl))
+                .route("swagger-credit-disbursements", r -> r.path("/v3/api-docs/credit-disbursements")
+                        .filters(f -> f
+                                .rewritePath("/v3/api-docs/credit-disbursements", "/v3/api-docs"))
+                        .uri(creditDisbursementServiceUrl))
                 .build();
     }
 }
