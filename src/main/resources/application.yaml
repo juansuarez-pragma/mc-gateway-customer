@@ -32,3 +32,20 @@ springdoc:
     operations-sorter: alpha
     tags-sorter: alpha
     display-request-duration: true
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 5 # Número de llamadas que monitorea antes de cambiar de estado
+        minimum-number-of-calls: 3 # Minimo de llamadas para evaluar el estado
+        failure-rate-threshold: 50 # Si el 50% de las ultimas 5 llamadas fallan, el circuito de abre
+        wait-duration-in-open-state: 10s # Tiempo qye espera antes de probar si el servicio volvio
+        permitted-number-of-calls-in-half-open-state: 2 # Intentos en HALF-OPEN antes de cerrar
+
+  timelimiter:
+    instances:
+      customerCircuitBreaker:
+        timeout-duration: 5s # Cualquier respuesta que tarde mas de 2s se considera fallo
+gateway:
+  retry:
+    attempts: 3
